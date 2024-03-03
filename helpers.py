@@ -8,9 +8,9 @@ from package import Package
 
 
 packageHashMap = HashMap()
-distCSVFile ="Data\distance.csv"
+distCSVFile ="Data/distance.csv"
 packageCSVFile = "Data/packages.csv"
-addressCSVFile = "Data/address.csv"
+addressCSVFile = "Data/locations.csv"
 
 csvReadDist = ReadCSV(distCSVFile)
 csvReadPackage = ReadCSV(packageCSVFile)
