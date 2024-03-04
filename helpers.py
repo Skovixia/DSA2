@@ -39,44 +39,67 @@ def loadPackage(packageData, packageInfo):
         
 loadPackage(CSVPackage, packageHashMap)
 
-# eodPackages = []
-# am10Packages = []
-# others = []
+eodPackages = []
+am10Packages = []
+others = []
 
-# for package in packageHashMap.items():
-#     if package.deadline == "EOD":
-#         eodPackages.append(package)
-#     elif package.deadline == "10:30 AM":
-#         am10Packages.append(package)
-#     else:
-#         others.append(package)
+for package in packageHashMap.items():
+    if package.deadline == "EOD":
+        eodPackages.append(package)
+    elif package.deadline == "10:30 AM":
+        am10Packages.append(package)
+    else:
+        others.append(package)
 
 
-# if eodPackages:
-#     print("EOD: ")
-#     print("-----------------------")
-#     for package in eodPackages:
-#         print("package Id: ", package.packageID)
-#         print("Package Deadline: ", package.deadline)
-#         print("Notes: ", package.notes)
-#         print("-----------------------")
-# if am10Packages:
-#     print("10:00 AM: ")
-#     print("-----------------------")
-#     for package in am10Packages:
-#         print("package Id: ", package.packageID)
-#         print("Package Deadline: ", package.deadline)
-#         print("Notes: ", package.notes)
-#         print("-----------------------")
-# if others:
-#     print("Others: ")
-#     print("-----------------------")
-#     for package in others:
-#         print("package Id: ", package.packageID)
-#         print("Package Deadline: ", package.deadline)
-#         print("Notes: ", package.notes)
-#         print("-----------------------")
+if eodPackages:
+    print("EOD: ")
+    print("-----------------------")
+    for package in eodPackages:
+        print("package Id: ", package.packageID)
+        print("Package Deadline: ", package.deadline)
+        print("Notes: ", package.notes)
+        print("-----------------------")
+if am10Packages:
+    print("10:00 AM: ")
+    print("-----------------------")
+    for package in am10Packages:
+        print("package Id: ", package.packageID)
+        print("Package Deadline: ", package.deadline)
+        print("Notes: ", package.notes)
+        print("-----------------------")
+if others:
+    print("Others: ")
+    print("-----------------------")
+    for package in others:
+        print("package Id: ", package.packageID)
+        print("Package Deadline: ", package.deadline)
+        print("Notes: ", package.notes)
+        print("-----------------------")
 
+
+
+def print_package_ids_by_address(package_hashmap):
+    # Create a dictionary to store package IDs by address
+    package_ids_by_address = {}
+
+    # Populate the dictionary with package IDs
+    for package in package_hashmap.items():
+        address = package.address
+        package_id = package.packageID
+
+        if address in package_ids_by_address:
+            package_ids_by_address[address].append(package_id)
+        else:
+            package_ids_by_address[address] = [package_id]
+
+    # Print package IDs for each address
+    for address, package_ids in package_ids_by_address.items():
+        print(f"Address: {address}")
+        print("Package IDs:", package_ids)
+        print()
+
+print_package_ids_by_address(packageHashMap)
 
 
 
@@ -191,9 +214,9 @@ def deliverPackage(truck, packageHashMap):
                     
                     
                     # print("Truck id: ", truck.id)
-                    # print("Truck time: ", datetime.timedelta(hours = distance /18) )
-                    # print("Package depart time: ",nextPackage.departureTime)
-                    # print("Package delivery time: ",nextPackage.deliveryTime)
+                    print("Truck time: ", datetime.timedelta(hours = distance /18) )
+                    print("Package depart time: ",nextPackage.departureTime)
+                    print("Package delivery time: ",nextPackage.deliveryTime)
                     #print(nextPackage.deadline )
                 else:
                     print("Error: Invalid distances")
