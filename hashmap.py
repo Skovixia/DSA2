@@ -63,7 +63,15 @@ class HashMap:
                 return True
             index +=1
         return False
-     
+    
+    def items(self):
+        allItems = []
+        for cell in self.map:
+            if cell is not None:
+                allItems.extend([pair[1] for pair in cell])
+        return allItems
+
+
     def printHash(self):
         print('---------------------------')
         for key_hash in range(self.size):

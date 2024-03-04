@@ -3,7 +3,7 @@ from hashmap import HashMap
 import datetime
 class Package:
 
-    def __init__(self, packageID, address, city, state, zip, deadline, weight,status, truck,departureTime, deliveryTime):
+    def __init__(self, packageID, address, city, state, zip, deadline, weight,status, truck,departureTime, deliveryTime, notes):
         self.packageID = packageID
         self.address = address
         self.city= city
@@ -16,9 +16,11 @@ class Package:
         self.deliveryTime= deliveryTime
         self.departureTime = departureTime
         #self.truck = truck
-        #self.notes = notes
+        self.notes = notes
     def __str__(self):
         return f"{self.packageID}, {self.address}, {self.city}, {self.state}, {self.zip}, {self.deadline}, {self.weight}, {self.status})"
+    
+    
     
     # def statusUpdate(self, timeConversion):
     #     if self.deliveryTime < timeConversion:
