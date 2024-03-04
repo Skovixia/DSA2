@@ -39,9 +39,13 @@ class Package:
                 else:
                     self.status = "At hub"
             else:
-                print("Error: Invalid time format for comparison")
+                print("-------------------------------------------")
+                print("ERROR: Invalid time format for comparison")
+                print("-------------------------------------------")
         else:
+            print("-------------------------------------------")
             print("Error: Delivery time or time conversion is None")
+            print("-------------------------------------------")
     
 # packageHashMap = HashMap()
 # def loadPackage(packageData, packageInfo):
