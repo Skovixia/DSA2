@@ -35,18 +35,19 @@ def loadPackage(packageData, packageInfo):
         packageDeadLine = package[5]
         packageWeight = package[6]
         packageStat = "At Hub"
-        packageObj = Package(packageID, packageAddress, packageCity, packageState, packageZip, packageDeadLine, packageWeight, packageStat)
+        packageTruck = None
+        packageDelTime= None
+        packageDepartTime = None
+        packageObj = Package(packageID, packageAddress, packageCity, packageState, packageZip, packageDeadLine, packageWeight, packageStat, packageTruck, packageDelTime, packageDepartTime)
         packageHashMap.add(packageID, packageObj)
-        print(f"Added package to hashmap - ID: {packageID}, Address: {packageAddress}, Status: {packageStat}")
+        #print(f"Added package to hashmap - ID: {packageID}, Address: {packageAddress}, Status: {packageStat}")
         
-
+loadPackage(CSVPackage, packageHashMap)
 
 def createLocationIndex(locations):
     return {location[2]: index for index, location in enumerate(locations)}
 
 locationIndex = createLocationIndex(CSVLocations)
-loadPackage(CSVPackage, packageHashMap)
-
 
 def getLocationIndex(address_info):
     # Convert the address_info to a tuple for consistent key format
@@ -68,9 +69,6 @@ def getLocation(address):
             return row[2]  # Returns the full tuple for the address
     return None
 
-import csv
-
-
 
 def distances(x, y):
     distance = CSVDist[x][y]
@@ -78,8 +76,6 @@ def distances(x, y):
         distance = CSVDist[y][x]
     return float(distance)
 
-
-    
 
 def find_nearest_package(current_location, undelivered_packages):
     #print("find nearest package starts:")
@@ -102,7 +98,7 @@ def find_nearest_package(current_location, undelivered_packages):
                 next_address = distance
                 next_package = package
                 #print("Nearest next package: ", next_package)
-    print("Found nearest! ")
+    #print("Found nearest! ")
     return next_package
 
 
@@ -111,14 +107,15 @@ def deliverPackage(truck, packageHashMap):
     
     while notDelivered and len(truck.packages) < truck.maxPackages:
         # Dynamically obtain the current location based on the truck's progress or GPS data
-        print("Truck Address: ",truck.address)
+        #print("Truck Address: ",truck.address)
         current_location_info = getLocation(truck.address)
-        print("Current location: ",current_location_info)
+       # print("Current location: ",current_location_info)
         current_location_index = getLocationIndex(current_location_info)
-        print("Current location index: ",current_location_index)
+        #print("Current location index: ",current_location_index)
 
         nextPackage = find_nearest_package(current_location_info, notDelivered)
-        print("Next package: ",nextPackage)
+       # print("Next package: ",nextPackage)
+        # nextPackage.truck = truck.id
 
         if nextPackage is not None:
             current_location_index = getLocationIndex(truck.address)
@@ -130,7 +127,7 @@ def deliverPackage(truck, packageHashMap):
 
             if current_location_index is not None and package_location_index is not None:
                 distance = distances(current_location_index, package_location_index)
-                print("Distance: ", distance)
+                #print("Distance: ", distance)
                 if distance is not None and distance != float('inf'):
                      # removes the current package from notDelivered
                     notDelivered = [package for package in notDelivered if package.packageID != nextPackage.packageID]
@@ -140,16 +137,19 @@ def deliverPackage(truck, packageHashMap):
 
                     # updates truck's address after delivering the package
                     truck.address = nextPackage.address
-
                     truck.time += datetime.timedelta(hours = distance /18)
-
-                    nextPackage.departureTime = truck.time
-                    nextPackage.deliveryTime = truck.departTime
+                    
+                    nextPackage.truck = truck.id
+                    print("Package truck: ", nextPackage.truck)
+                    nextPackage.departureTime = truck.departTime
+                    nextPackage.deliveryTime = truck.time
                     
                     
-
-                    print(nextPackage.departureTime)
-                    print(nextPackage.deliveryTime)
+                    print("Truck id: ", truck.id)
+                    print("Truck time: ", datetime.timedelta(hours = distance /18) )
+                    print("Package depart time: ",nextPackage.departureTime)
+                    print("Package delivery time: ",nextPackage.deliveryTime)
+                    #print(nextPackage.deadline )
                 else:
                     print("Error: Invalid distances")
                     break
@@ -159,13 +159,13 @@ def deliverPackage(truck, packageHashMap):
         else:
             break
 
-    # truck.packages = list(set(truck.packages))
-    # print(f"Truck {truck.maxPackages} Total Mileage: {truck.miles}")
-    # print(f"Truck {truck.maxPackages} Packages: {truck.packages}")
+    truck.packages = list(set(truck.packages))
+    print(f"Truck {truck.id} Total Mileage: {truck.miles}")
+    print(f"Truck {truck.id} Packages: {truck.packages}")
 
 
 deliverPackage(truck1, packageHashMap)
-deliverPackage(truck2, packageHashMap)
-truck3.departTime = min(truck1.time, truck2.time)
-deliverPackage(truck3, packageHashMap)
+# deliverPackage(truck2, packageHashMap)
+# truck3.departTime = min(truck1.time, truck2.time)
+# deliverPackage(truck3, packageHashMap)
 

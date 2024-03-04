@@ -1,8 +1,9 @@
 import csv
 from hashmap import HashMap
+import datetime
 class Package:
 
-    def __init__(self, packageID, address, city, state, zip, deadline, weight,status):
+    def __init__(self, packageID, address, city, state, zip, deadline, weight,status, truck,departureTime, deliveryTime):
         self.packageID = packageID
         self.address = address
         self.city= city
@@ -11,20 +12,36 @@ class Package:
         self.deadline = deadline
         self.weight = weight
         self.status = status
-        self.deliveryTime= None
-        self.departureTime = None
+        self.truck = truck
+        self.deliveryTime= deliveryTime
+        self.departureTime = departureTime
         #self.truck = truck
         #self.notes = notes
     def __str__(self):
         return f"{self.packageID}, {self.address}, {self.city}, {self.state}, {self.zip}, {self.deadline}, {self.weight}, {self.status})"
     
-    def statusUpdate(self, convert_timedelta):
-        if self.deliveryTime < convert_timedelta:
-            self.status = "Delivered"
-        elif self.departureTime > convert_timedelta: 
-            self.status = "En route"
+    # def statusUpdate(self, timeConversion):
+    #     if self.deliveryTime < timeConversion:
+    #         self.status = "Delivered"
+    #     elif self.departureTime > timeConversion: 
+    #         self.status = "En route"
+    #     else:
+    #         self.status = "At hub"
+
+
+    def statusUpdate(self, timeConversion):
+        if self.deliveryTime is not None and timeConversion is not None:
+            if isinstance(self.deliveryTime, datetime.timedelta) and isinstance(timeConversion, datetime.timedelta):
+                if self.deliveryTime < timeConversion:
+                    self.status = "Delivered"
+                elif self.departureTime > timeConversion: 
+                    self.status = "En route"
+                else:
+                    self.status = "At hub"
+            else:
+                print("Error: Invalid time format for comparison")
         else:
-            self.status = "At hub"
+            print("Error: Delivery time or time conversion is None")
     
 # packageHashMap = HashMap()
 # def loadPackage(packageData, packageInfo):

@@ -17,18 +17,21 @@ print("Truck 3 Packages:", truck3.packages)
 print("Truck 1 Packages:", truck1.departTime)
 print("Truck 2 Packages:", truck2.departTime)
 print("Truck 3 Packages:", truck3.departTime)
+totalMiles = truck1.miles + truck2.miles + truck3.miles
 
 class Main:
     print("WGPUS:")
-    print("The mileage for the route is:")
-  
+    print("The mileage for the route is: ")
+    print(totalMiles)
+    
 
     text = input("To start please type the word 'time' (Anything else will quit the program): ")
     if text == "time":
         try:
             user_time = input("Please enter a time to check the status of a package. Use HH:MM:SS ")
             (h, m, s) = user_time.split(":")
-            convert_timedelta = datetime.timedelta(hours=int(h), minutes=int(m), seconds=int(s))
+            timeConversion = datetime.timedelta(hours=int(h), minutes=int(m), seconds=int(s))
+            print(timeConversion)
             second_input = input("To view the status of the package please type 'solo' for a rundown of all packages please type 'all': ")
             if second_input == "solo":
                 try:
@@ -42,7 +45,7 @@ class Main:
                 try:
                     for packageID in range(1, 41):
                         package = packageHashMap.get(packageID)
-                        package.statusUpdate(convert_timedelta)
+                        package.statusUpdate(timeConversion)
                         print(str(package))
                 except ValueError:
                     print("Invalid entry")
