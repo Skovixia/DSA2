@@ -21,7 +21,7 @@ print("Truck 3 Packages:", truck3.departTime)
 class Main:
     print("WGPUS:")
     print("The mileage for the route is:")
-    print(truck1.miles + truck2.miles + truck3.miles)
+  
 
     text = input("To start please type the word 'time' (Anything else will quit the program): ")
     if text == "time":
