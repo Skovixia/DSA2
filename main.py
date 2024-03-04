@@ -14,9 +14,9 @@ print("Truck 1 Packages:", truck1.packages)
 print("Truck 2 Packages:", truck2.packages)
 print("Truck 3 Packages:", truck3.packages)
 
-print("Truck 1 Packages:", truck1.depart)
-print("Truck 2 Packages:", truck2.depart)
-print("Truck 3 Packages:", truck3.depart)
+print("Truck 1 Packages:", truck1.departTime)
+print("Truck 2 Packages:", truck2.departTime)
+print("Truck 3 Packages:", truck3.departTime)
 
 class Main:
     print("WGPUS:")

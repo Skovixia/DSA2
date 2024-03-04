@@ -14,14 +14,14 @@ class ReadCSV:
         return data
     
 
-# distCSVFile ="Data\distance.csv"
-# packageCSVFile = "Data/packages.csv"
-# addressCSVFile = "Data/address.csv"
+distCSVFile ="Data/distance.csv"
+packageCSVFile = "Data/packages.csv"
+locationsCSVFile = "Data/locations.csv"
 
 # csvReadDist = ReadCSV(distCSVFile)
 # csvReadPackage = ReadCSV(packageCSVFile)
-# csvReadAddress = ReadCSV(addressCSVFile)
+# csvReadLocations = ReadCSV(locationsCSVFile)
 
 # CSVDist = csvReadDist.readCSV()
 # CSVPackage = csvReadPackage.readCSV()
-# CSVAddress = csvReadAddress.readCSV()
+# CSVLocations = csvReadLocations.readCSV()
