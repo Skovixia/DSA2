@@ -37,7 +37,7 @@ class HashMap:
             #self.insertion_order.append(key_value)
             return True
         
-    def get(self,key):
+    def lookup(self,key):
         #get the hash using key
         key_hash = self._get_hash(key)
         #locate the cell, checking if it is not None

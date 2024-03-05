@@ -27,7 +27,7 @@ def findNextPackage(currentLocation, undeliveredPackages):
 counter = 0
 def deliverPackage(truck, packageHashMap):
     global counter
-    notDelivered = [packageHashMap.get(packageID) for packageID in truck.packages]
+    notDelivered = [packageHashMap.lookup(packageID) for packageID in truck.packages]
     while notDelivered  and len(truck.packages) <= truck.maxPackages:
         # dynamically gets current location based on the truck's progress
         currentLocation = getLocation(truck.address)

@@ -49,18 +49,18 @@ class Main:
 
                 if userInput.lower() == 's':
                     singlePackage = input("Enter the package ID: ")    
-                    package = packageHashMap.get(int(singlePackage))
+                    package = packageHashMap.lookup(int(singlePackage))
                     print(package)
 
                 elif userInput.lower() == 'a':
                     for packageID in range(1, 41):
-                        package = packageHashMap.get(packageID)
+                        package = packageHashMap.lookup(packageID)
                         package.statusUpdate(timeValidation(time))
                         print(package)
                 elif userInput.lower() == 'd':
                     packageDelivered = False
                     for packageID in range(1, 41):
-                        package = packageHashMap.get(packageID)
+                        package = packageHashMap.lookup(packageID)
                         package.statusUpdate(timeValidation(time))
                         if package.status == "Delivered":
                             packageDelivered = True
@@ -71,7 +71,7 @@ class Main:
                 elif userInput.lower() == 'e':
                         packagesEnRoute = False
                         for packageID in range(1, 41):
-                            package = packageHashMap.get(packageID)
+                            package = packageHashMap.lookup(packageID)
                             package.statusUpdate(timeValidation(time))
                             if package.status == "En route":
                                 packagesEnRoute = True
@@ -81,7 +81,7 @@ class Main:
                 elif userInput.lower() == 'h':
                     packageAtHub = False
                     for packageID in range(1, 41):
-                        package = packageHashMap.get(packageID)
+                        package = packageHashMap.lookup(packageID)
                         package.statusUpdate(timeValidation(time))
                         if package.status == "At Hub":
                             packageAtHub = True
