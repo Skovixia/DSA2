@@ -16,7 +16,7 @@ class Truck:
     def __str__(self):
         return f"{self.maxPackages},{self.id}, {self.speed}, {self.load}, {self.packages}, {self.miles}, {self.address}, {self.departTime})"    
 
-# creating truck objects
+# creating truck objects                                        All packages that have deadline of 10:30 + some EOD packages
 truck1 = Truck(id=1, maxPackages=16, speed=18, load=None, packages=[1, 39, 4, 5, 7, 13, 14, 15, 16, 20, 29, 30, 31, 34, 37, 40],
                miles=0.0, address="4001 South 700 East", departureTime=datetime.timedelta(hours=8))
 

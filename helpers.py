@@ -24,13 +24,20 @@ def findNextPackage(currentLocation, undeliveredPackages):
     #print("Found nearest! ", nextAddress)
     return nextPackage
 
-
+counter = 0
 def deliverPackage(truck, packageHashMap):
+    global counter
     notDelivered = [packageHashMap.get(packageID) for packageID in truck.packages]
     while notDelivered  and len(truck.packages) <= truck.maxPackages:
         # dynamically gets current location based on the truck's progress
         currentLocation = getLocation(truck.address)
         currentIndex = getLocationIndex(currentLocation)
+
+
+        # print("Delivery truck ", truck.id)
+        # print("-----------------------")
+        # print("Truck location: ", truck.address)
+
 
         #serachinbg for next closest package
         nextPackage = findNextPackage(currentLocation, notDelivered)
@@ -42,10 +49,16 @@ def deliverPackage(truck, packageHashMap):
             currentIndex = getLocationIndex(truck.address)
             packageIndex = getLocationIndex(nextPackage.address)
 
+            #print("Next Package address: ", nextPackage.address)
+
             if currentIndex is not None and packageIndex is not None:
 
                 #getting distance
                 distance = distances(currentIndex, packageIndex)
+                #print("Distance: ", distance)
+                #for me to output total amount of packages delivered
+                counter += 1
+                #print("Total Packages Delivered: ", counter)
                 #error handling for testing
                 if distance is not None and distance != float('inf'):
 
@@ -73,6 +86,7 @@ def deliverPackage(truck, packageHashMap):
         else:
             print("Error: No next package found")
             break
+
    
 
 deliverPackage(truck1, packageHashMap)
