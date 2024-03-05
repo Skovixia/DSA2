@@ -19,13 +19,22 @@ class Package:
         self.departureTime = None
         self.notes = notes
     def __str__(self):
-        return f"{self.packageID}, {self.address}, {self.city}, {self.state}, {self.zip}, {self.deadline}, {self.weight}, {self.truck}, Departure Time: {self.departureTime}, Delivery Time: {self.deliveryTime}, {self.status})"
+        #for interface.. It not delivered yet, will display "estimated delivery"
+        if self.status == "Delivered":
+            deliveryLabel = "Delivery Time" 
+        else:
+            deliveryLabel = "Estimated Delivery Time"
+
+        strLength = len(f"|{self.packageID}| Destination: {self.address}, {self.city}, {self.state}, {self.zip}| Deadline: {self.deadline}| Weight: {self.weight}| Truck: {self.truck}| Departure Time: {self.departureTime}| {deliveryLabel}: {self.deliveryTime}| Status: {self.status}")
+        print("-" * strLength)
+        return f"|{self.packageID}| Destination: {self.address}, {self.city}, {self.state}, {self.zip}| Deadline: {self.deadline}| Weight: {self.weight}| Truck: {self.truck}| Departure Time: {self.departureTime}| {deliveryLabel}: {self.deliveryTime}| Status: {self.status}"
+        
     
     #for updating status based on time given in main
-    def statusUpdate(self, timeConversion):
-        if self.deliveryTime < timeConversion:
+    def statusUpdate(self, enquiryTime):
+        if self.deliveryTime < enquiryTime:
             self.status = "Delivered"
-        elif self.departureTime <= timeConversion <= self.deliveryTime:
+        elif self.departureTime <= enquiryTime <= self.deliveryTime:
             self.status = "En route"
         else:
             self.status = "At hub"
