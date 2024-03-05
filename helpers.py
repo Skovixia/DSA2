@@ -1,6 +1,5 @@
 from readCSV import CSVLocations, CSVDist
 import datetime
-import re
 
 def createLocationIndex(locations):
     return {location[2]: index for index, location in enumerate(locations)}

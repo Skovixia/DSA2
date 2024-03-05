@@ -1,4 +1,3 @@
-import datetime
 from truck import truck1, truck2, truck3
 from deliveryProcess import packageHashMap
 from helpers import timeValidation

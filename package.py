@@ -14,7 +14,7 @@ class Package:
         self.status = status
         #assigning a truck to each package(for debugging)
         self.truck = truck
-        #setting del time and depart time to non, will be updated when delivered
+        #setting del time and depart time to none, will be updated when delivered
         self.deliveryTime= None
         self.departureTime = None
         self.notes = notes
