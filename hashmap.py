@@ -64,6 +64,7 @@ class HashMap:
             index +=1
         return False
     
+    #function for getting all hashmap items
     def items(self):
         allItems = []
         for cell in self.map:
@@ -79,23 +80,10 @@ class HashMap:
                 for key, value in self.map[key_hash]:
                     print(f"Key: {key}, Value: {value}")
         print("End of Hash Map")
-                
-    # h=HashMap
-# filepath = r"Data/address.csv"
-# with open(filepath) as fp:
-#     reader = csv.reader(fp, delimiter = ",", quotechar = '"')
-#     data_read = [row for row in reader]
 
-# print(data_read)
-    
-# myHashMap = HashMap()
 
-# csvFiles = ['Data/address.csv', "Data/distance.csv"]
+#hashmap testing
 
-# csv_file = r'Data/address.csv'
-# with open(csv_file) as file:
-#     reader = csv.DictReader(file)
-#     print(reader.fieldnames)
 # h = HashMap()
 # h.add("A", 1)
 # h.add("B", 2)
