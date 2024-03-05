@@ -1,4 +1,5 @@
 from deliveryProcess import packageHashMap
+from helpers import distances, getLocationIndex
 
 
 #this file helps determime which packages to load into which truck 
@@ -25,7 +26,7 @@ if eodPackages:
         print("Notes: ", package.notes)
         print("-----------------------")
 if am10Packages:
-    print("10:00 AM: ")
+    print("10:30 AM: ")
     print("-----------------------")
     for package in am10Packages:
         print("package Id: ", package.packageID)
@@ -57,10 +58,27 @@ def printPackageAddress(packageHashMap):
         else:
             packagesByAddresses[address] = [packageID]
 
+
     # prints packages by address
-    for address, package_ids in packagesByAddresses.items():
+    for address, packageIDs in packagesByAddresses.items():
         print(f"Address: {address}")
-        print("Package IDs:", package_ids)
+        print("Package IDs:", packageIDs)
         print()
+
+        # for packageID in packageIDs:
+        #     closestPackage = None
+        #     closestDistance = float('inf')
+
+        #     for otherPackageID, otherPackageInfo in packageHashMap.items():
+        #         if packageID != otherPackageID:
+        #             otherAddresses = otherPackageInfo['address']
+        #             distance = distances(getLocationIndex(address), getLocationIndex(otherAddresses))
+        #             if distance < closestDistance:
+        #                 closestDistance = distance
+        #                 closestPackage = otherPackageID
+        #         if closestPackage is not None:
+        #             print(f"Closest package to Package {packageID}: {closestPackage} (Distance: {closestDistance})")
+
+        #     print()
 
 printPackageAddress(packageHashMap)
