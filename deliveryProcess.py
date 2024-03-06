@@ -3,6 +3,8 @@ from truck import truck1, truck2, truck3
 from package import packageHashMap
 from helpers import getLocationIndex, distances
 
+counter = 0
+
 def findNextPackage(currentIndex, undeliveredPackages):
     #print("find nearest package starts:")
     nextAddress = float('inf')
@@ -23,12 +25,13 @@ def findNextPackage(currentIndex, undeliveredPackages):
     #print("Found nearest! ", nextAddress)
     return nextPackage
 
-counter = 0
+
+
 def deliverPackage(truck, packageHashMap):
     global counter
     notDelivered = [packageHashMap.lookup(packageID) for packageID in truck.packages]
 
-    while notDelivered  and len(truck.packages) <= truck.maxPackages:
+    while len(notDelivered) > 0:
         #gets current location based on the truck's progress
         currentIndex = getLocationIndex(truck.address)
 
