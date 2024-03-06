@@ -19,12 +19,13 @@ class Main:
         time = input("Please enter enquiry time or 'q' to quit: ")
         if time.lower() == 'q':
             exit()
+            #confirms if time input is proper (found in helpers)
         if timeValidation(time):
             break
         else: 
             print("Invalid format. Please enter a time in the format: HH:MM:SS ")
 
-
+    #allows for options to be available until user quits
     while True:
         print()
         print("-----------------------------------------------------------------")
@@ -41,23 +42,26 @@ class Main:
 
         if userInput.lower() == 'q':
             break
-        
+        #all options except for new time input
         if userInput in['s', 'S', 'a', 'A', 'd', 'D', 'e', 'E', 'h', 'H']:
             try:
 
                 print("Input time: ", time)
 
                 if userInput.lower() == 's':
-                    singlePackage = input("Enter the package ID: ")    
+                    singlePackage = input("Enter the package ID: ")   
+                    #gets and prints package info for selected package ID 
                     package = packageHashMap.lookup(int(singlePackage))
                     print(package)
 
                 elif userInput.lower() == 'a':
+                    #printing all package info & updating delivery status depending on time
                     for packageID in range(1, 41):
                         package = packageHashMap.lookup(packageID)
                         package.statusUpdate(timeValidation(time))
                         print(package)
                 elif userInput.lower() == 'd':
+                    #only prints packages with "Delivered" status at current time
                     packageDelivered = False
                     for packageID in range(1, 41):
                         package = packageHashMap.lookup(packageID)
@@ -65,10 +69,10 @@ class Main:
                         if package.status == "Delivered":
                             packageDelivered = True
                             print(package)
-
                     if not packageDelivered:
                         print("No packages have been delivered at this time.")
                 elif userInput.lower() == 'e':
+                        #only prints packages with status of "en route" at input time
                         packagesEnRoute = False
                         for packageID in range(1, 41):
                             package = packageHashMap.lookup(packageID)
@@ -79,6 +83,7 @@ class Main:
                         if not packagesEnRoute:
                              print("No packages are en route at this time.")
                 elif userInput.lower() == 'h':
+                    #only prints packages that have not been delivered or left the hub yet (at current time)
                     packageAtHub = False
                     for packageID in range(1, 41):
                         package = packageHashMap.lookup(packageID)
@@ -90,13 +95,16 @@ class Main:
                         print("No packages are at the Hub at this time.")
                 else:
                     print("Invalid option. Please try again or type 'q' to quit.")
+                    #if input is not expected value
             except ValueError:
                 print("Invalid option. Please try again or type 'q' to quit.")
         elif userInput.lower() == 't':
+            #option for new time input
             while True:
                 newTime = input("Please enter enquiry time or 'q' to quit: ")
                 if newTime.lower()== 'q':
                     break
+                #validating time
                 if timeValidation(newTime):
                     time = newTime
                     break
