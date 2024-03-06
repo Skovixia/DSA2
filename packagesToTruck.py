@@ -59,26 +59,18 @@ def printPackageAddress(packageHashMap):
             packagesByAddresses[address] = [packageID]
 
 
-    # prints packages by address
+    #prints packages by address
     for address, packageIDs in packagesByAddresses.items():
         print(f"Address: {address}")
         print("Package IDs:", packageIDs)
         print()
 
-        # for packageID in packageIDs:
-        #     closestPackage = None
-        #     closestDistance = float('inf')
+        
+# items = packageHashMap.items()
 
-        #     for otherPackageID, otherPackageInfo in packageHashMap.items():
-        #         if packageID != otherPackageID:
-        #             otherAddresses = otherPackageInfo['address']
-        #             distance = distances(getLocationIndex(address), getLocationIndex(otherAddresses))
-        #             if distance < closestDistance:
-        #                 closestDistance = distance
-        #                 closestPackage = otherPackageID
-        #         if closestPackage is not None:
-        #             print(f"Closest package to Package {packageID}: {closestPackage} (Distance: {closestDistance})")
+# for item in items:
+#     print(item)
 
-        #     print()
-
+# print()
+packageHashMap.printHash()
 printPackageAddress(packageHashMap)

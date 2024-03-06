@@ -69,7 +69,9 @@ class HashMap:
         allItems = []
         for cell in self.map:
             if cell is not None:
-                allItems.extend([pair[1] for pair in cell])
+                for pair in cell:
+                    allItems.extend([pair[1] for pair in cell])
+                    # allItems.extend(f"({key}, {value})")
         return allItems
 
 
