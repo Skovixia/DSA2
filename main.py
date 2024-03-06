@@ -2,10 +2,7 @@
 from truck import truck1, truck2, truck3
 from deliveryProcess import packageHashMap
 from helpers import timeValidation
-# print("Truck 1 Packages:", truck1.packages)
-# print("Truck 2 Packages:", truck2.packages)
-# print("Truck 3 Packages:", truck3.packages)
-# print()
+
 print("Truck 1 Departure Time:", truck1.departTime)
 print("Truck 2 Departure Time:", truck2.departTime)
 print("Truck 3 Departure Time:", truck3.departTime)
