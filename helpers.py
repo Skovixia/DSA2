@@ -1,7 +1,7 @@
 from readCSV import CSVLocations, CSVDist
 import datetime
 
-#This file contains additional getters ie. location index, getting location, distance finder
+#This file contains additional getters ie. location index, getting location, distance finder + time format validator for main
 
 
 #just reads through locations.csv (second col) stores addresses into dictionary
@@ -11,10 +11,10 @@ def createLocationDictionary(locations):
 #sends locations.csv info to creation dictionary
 locationDict = createLocationDictionary(CSVLocations)
 
-
 #dictionary key is the address, value is the index; this returns the index 
 def getLocationIndex(address):
     return locationDict.get(address)
+
 
 #locates the appropriate distance from distance.csv (read like matrix) using the location indexes(numeric values)
 def distances(index1, index2):
