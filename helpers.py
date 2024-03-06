@@ -7,10 +7,10 @@ def createLocationIndex(locations):
 locationIndex = createLocationIndex(CSVLocations)
 
 def getLocationIndex(addressInfo):
-    # Convert the address (just street names)
+    # converts the address (just street names)
     address = getLocation(addressInfo)
 
-    # Check if the addresse is present in the locationIndex dictionary
+    # checks if the addresse is present in the locationIndex dictionary
     if address in locationIndex:
         return locationIndex[address]
     else:
@@ -44,6 +44,7 @@ def timeValidation(time):
             hours = int(hms[0])
             minutes = int(hms[1])
             seconds = int(hms[2])
+            #confirms that time input is within the proper constraints for h, m, s
             if 0 <= hours < 24 and 0<= minutes < 60 and 0<= seconds < 60:
                 return datetime.timedelta(hours=hours, minutes=minutes, seconds=seconds)
         except ValueError:
