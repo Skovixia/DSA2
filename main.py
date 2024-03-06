@@ -1,3 +1,4 @@
+#Student ID: 010604128
 from truck import truck1, truck2, truck3
 from deliveryProcess import packageHashMap
 from helpers import timeValidation
@@ -19,7 +20,7 @@ class Main:
         time = input("Please enter enquiry time or 'q' to quit: ")
         if time.lower() == 'q':
             exit()
-            #confirms if time input is proper (found in helpers)
+            #confirms if time input is proper (found in helpers.py)
         if timeValidation(time):
             break
         else: 
@@ -58,6 +59,7 @@ class Main:
                     #printing all package info & updating delivery status depending on time
                     for packageID in range(1, 41):
                         package = packageHashMap.lookup(packageID)
+                        #status update defined in package.py
                         package.statusUpdate(timeValidation(time))
                         print(package)
                 elif userInput.lower() == 'd':
