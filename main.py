@@ -1,5 +1,5 @@
 #Student ID: 010604128
-from truck import truck1, truck2, truck3
+from truck import *
 from deliveryProcess import packageHashMap
 from helpers import timeValidation
 

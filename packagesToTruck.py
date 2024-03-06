@@ -1,5 +1,5 @@
 from deliveryProcess import packageHashMap
-from helpers import distances, getLocationIndex
+from helpers import *
 
 #THIS FILE DOES NOT AFFECT PROJECT FUNCTIONALITY
 #this file helped me determime which packages to load into which truck 

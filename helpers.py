@@ -1,4 +1,4 @@
-from readCSV import CSVLocations, CSVDist
+from readCSV import *
 import datetime
 
 #This file contains additional getters ie. location index, getting location, distance finder + time format validator for main
