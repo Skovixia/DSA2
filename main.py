@@ -73,22 +73,22 @@ class Main:
                         print("No packages have been delivered at this time.")
                 elif userInput.lower() == 'e':
                         #only prints packages with status of "en route" at input time
-                        packagesEnRoute = False
-                        for packageID in range(1, 41):
-                            package = packageHashMap.lookup(packageID)
-                            package.statusUpdate(timeValidation(time))
-                            if package.status == "En route":
-                                packagesEnRoute = True
-                                print(package)
-                        if not packagesEnRoute:
-                             print("No packages are en route at this time.")
+                    packagesEnRoute = False
+                    for packageID in range(1, 41):
+                        package = packageHashMap.lookup(packageID)
+                        package.statusUpdate(timeValidation(time))
+                        if package.status == "En route":
+                            packagesEnRoute = True
+                            print(package)
+                    if not packagesEnRoute:
+                        print("No packages are en route at this time.")
                 elif userInput.lower() == 'h':
                     #only prints packages that have not been delivered or left the hub yet (at current time)
                     packageAtHub = False
                     for packageID in range(1, 41):
                         package = packageHashMap.lookup(packageID)
                         package.statusUpdate(timeValidation(time))
-                        if package.status == "At Hub":
+                        if package.status == "At hub":
                             packageAtHub = True
                             print(package)
                     if not packageAtHub:

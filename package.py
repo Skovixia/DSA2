@@ -31,10 +31,10 @@ class Package:
         
     
     #for updating status based on time given in main
-    def statusUpdate(self, enquiryTime):
-        if self.deliveryTime < enquiryTime:
+    def statusUpdate(self, inputTime):
+        if self.deliveryTime < inputTime:
             self.status = "Delivered"
-        elif self.departureTime <= enquiryTime <= self.deliveryTime:
+        elif self.departureTime <= inputTime <= self.deliveryTime:
             self.status = "En route"
         else:
             self.status = "At hub"
@@ -59,12 +59,12 @@ loadPackages(CSVPackage, packageHashMap)
 
 
 
-    # def statusUpdate(self, timeConversion):
-    #     if self.deliveryTime is not None and timeConversion is not None:
-    #         if isinstance(self.deliveryTime, datetime.timedelta) and isinstance(timeConversion, datetime.timedelta):
-    #             if self.deliveryTime < timeConversion:
+    # def statusUpdate(self, inputTime):
+    #     if self.deliveryTime is not None and inputTime is not None:
+    #         if isinstance(self.deliveryTime, datetime.timedelta) and isinstance(inputTime, datetime.timedelta):
+    #             if self.deliveryTime < inputTime:
     #                 self.status = "Delivered"
-    #             elif self.departureTime > timeConversion: 
+    #             elif self.departureTime > inputTime: 
     #                 self.status = "En route"
     #             else:
     #                 self.status = "En route"
