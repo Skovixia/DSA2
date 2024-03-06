@@ -1,11 +1,10 @@
 import datetime
 from truck import truck1, truck2, truck3
 from package import packageHashMap
-from helpers import getLocation, getLocationIndex, distances
+from helpers import getLocationIndex, distances
 
-def findNextPackage(currentLocation, undeliveredPackages):
+def findNextPackage(currentIndex, undeliveredPackages):
     #print("find nearest package starts:")
-    currentIndex = getLocationIndex(currentLocation)
     nextAddress = float('inf')
     nextPackage = None
 
@@ -28,53 +27,41 @@ counter = 0
 def deliverPackage(truck, packageHashMap):
     global counter
     notDelivered = [packageHashMap.lookup(packageID) for packageID in truck.packages]
+
     while notDelivered  and len(truck.packages) <= truck.maxPackages:
-        # dynamically gets current location based on the truck's progress
-        currentLocation = getLocation(truck.address)
-        currentIndex = getLocationIndex(currentLocation)
+        #gets current location based on the truck's progress
+        currentIndex = getLocationIndex(truck.address)
 
+        #seraching for next closest package
+        nextPackage = findNextPackage(currentIndex, notDelivered)
 
-        # print("Delivery truck ", truck.id)
-        # print("-----------------------")
-        # print("Truck location: ", truck.address)
-
-
-        #serachinbg for next closest package
-        nextPackage = findNextPackage(currentLocation, notDelivered)
         #sets which truck the package object is assigned to 
         nextPackage.truck = truck.id
 
         if nextPackage is not None:
-            #finding valid location from locations csv
+            #retrieves index from location dictionary in helpers.py
             currentIndex = getLocationIndex(truck.address)
             packageIndex = getLocationIndex(nextPackage.address)
-
-            #print("Next Package address: ", nextPackage.address)
 
             if currentIndex is not None and packageIndex is not None:
 
                 #getting distance
                 distance = distances(currentIndex, packageIndex)
-                #print("Distance: ", distance)
-                #for me to output total amount of packages delivered
-                counter += 1
-                #print("Total Packages Delivered: ", counter)
+                
+                counter += 1 #outputs total amount of delivered packages for testing
+                
                 #error handling for testing
                 if distance is not None and distance != float('inf'):
-
-                     # removes the current package from notDelivered
-                    notDelivered = [package for package in notDelivered if package.packageID != nextPackage.packageID]
-                   
-                    # updates truck's mileage
-                    truck.miles += distance
-
-                    # updates truck's address after delivering the package
-                    truck.address = nextPackage.address
-                    #gets total time it took to complete delivery (divide by 1; avg truck speed)
+                    # removes the current package from notDelivered
+                    notDelivered.remove(nextPackage)
+                    
+                    #gets total time it took to complete delivery (divide by 18; avg truck speed)
                     deliveryDuration = datetime.timedelta(hours = distance /18)
-                    #updating truck time
+
+                    # updates truck's mileeage, address, time and departure time after delivering the package
+                    truck.miles += distance
+                    truck.address = nextPackage.address
                     truck.time +=  deliveryDuration
-                    #updating departure time and delivery time of current/next package
                     nextPackage.departureTime = truck.departTime
                     nextPackage.deliveryTime = truck.time
                 else:
@@ -95,6 +82,11 @@ deliverPackage(truck2, packageHashMap)
 truck3.time = min(truck1.time, truck2.time)
 truck3.departTime = min(truck1.time, truck2.time)
 deliverPackage(truck3, packageHashMap)
+
+
+
+
+
 
 
   #error finding

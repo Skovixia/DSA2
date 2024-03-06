@@ -1,5 +1,6 @@
 import csv
 
+#source citation: Youtube - Python: Creating a HASHMAP using Lists and C950 - Webinar-1 - Let’s Go Hashing - Complete Python Code
 class HashMap:
     #constructor with 2 varaibles
     def __init__(self, size=40):

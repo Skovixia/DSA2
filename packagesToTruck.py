@@ -1,8 +1,8 @@
 from deliveryProcess import packageHashMap
 from helpers import distances, getLocationIndex
 
+#this file helped me determime which packages to load into which truck 
 
-#this file helps determime which packages to load into which truck 
 eodPackages = []
 am10Packages = []
 others = []
@@ -65,12 +65,4 @@ def printPackageAddress(packageHashMap):
         print("Package IDs:", packageIDs)
         print()
 
-        
-# items = packageHashMap.items()
-
-# for item in items:
-#     print(item)
-
-# print()
-#packageHashMap.printHash()
 printPackageAddress(packageHashMap)

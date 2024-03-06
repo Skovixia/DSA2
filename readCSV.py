@@ -4,11 +4,12 @@ import csv
 
 #class with general functions for reading csvs
 class ReadCSV:
+    #sets delimiter to commas since the csv data is separated by commas
     def __init__ (self, filePath, delimiter=','):
         self.filePath = filePath
         self.delimiter= delimiter
 
-    #actrual csv reader
+    #actual csv reader
     def readCSV(self):
         data = []
         with open(self.filePath, encoding='utf-8-sig') as file:
