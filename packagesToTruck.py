@@ -41,7 +41,10 @@ if others:
         print("Package Deadline: ", package.deadline)
         print("Notes: ", package.notes)
         print("-----------------------")
-
+print("Total 10:30 AM Packages: ", len(am10Packages))
+print("Total EOD Packages: ", len(eodPackages))
+print("Total Other Packages: ", len(others))
+print()
 
 #function prints packges that have the same address
 def printPackageAddress(packageHashMap):
