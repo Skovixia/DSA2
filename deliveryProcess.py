@@ -44,9 +44,9 @@ def deliverPackage(truck, packageHashMap):
     #gets current location based on the truck's progress
     sortedPackages = sortPackages(getLocationIndex(truck.address), truck)
 
-    print("Sorted packages: ")
-    for package in sortedPackages:
-        print(package.packageID)
+    # print("Sorted packages: ")
+    # for package in sortedPackages:
+    #     print(package.packageID)
     
     for package in sortedPackages:
         #sets which truck the package object is assigned to 
