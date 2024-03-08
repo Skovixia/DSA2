@@ -6,6 +6,11 @@ from helpers import timeValidation
 print("Truck 1 Departure Time:", truck1.departTime)
 print("Truck 2 Departure Time:", truck2.departTime)
 print("Truck 3 Departure Time:", truck3.departTime)
+print()
+print("Truck 1 Total Miles:", truck1.miles)
+print("Truck 2 Total Miles:", truck2.miles)
+print("Truck 3 Total Miles:", truck3.miles)
+
 totalMiles = truck1.miles + truck2.miles + truck3.miles
 
 class Main:
