@@ -41,6 +41,7 @@ class HashMap:
             #self.insertion_order.append(key_value)
             return True
         
+        #same process as the add function- only used for updating addresses if package has wrong address listed
     def update(self, key, value):
         key_hash = self._get_hash(key)
         if self.map[key_hash] is None:
