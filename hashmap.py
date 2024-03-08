@@ -41,6 +41,23 @@ class HashMap:
             #self.insertion_order.append(key_value)
             return True
         
+    def update(self, key, value):
+        key_hash = self._get_hash(key)
+        if self.map[key_hash] is None:
+            return False
+        for pair in self.map[key_hash]:
+            if pair[0] == key:
+                existingValue = pair[1]
+                if value.address is not None:
+                    existingValue.address = value.address
+                if value.city is not None:
+                    existingValue.city = value.city
+                if value.state is not None:
+                    existingValue.state = value.state
+                if value.zip is not None:
+                    existingValue.zip = value.zip
+        return True
+
     def lookup(self,key):
         #get the hash using key
         key_hash = self._get_hash(key)
