@@ -64,11 +64,10 @@ def updatePackageAddress(packageID, newAddress = None, newCity = None, newState 
     package = packageHashMap.lookup(packageID)
 
     updatedPackage = Package(
-      packageID, newAddress,  # Update only address
+      packageID, newAddress,   # Updates only address fields
       newCity, newState, newZip,
       package.deadline, package.weight, package.status, package.truck, package.deliveryTime,
       package.departureTime, package.notes
       )
     packageHashMap.update(packageID, updatedPackage)
     return packageHashMap.lookup(packageID)
-
