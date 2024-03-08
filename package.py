@@ -49,10 +49,26 @@ def loadPackages(packageData, hashmap):
         packageTruck = None
         packageDelTime= None
         packageDepartTime = None
-        packageObj = Package(packageID, packageAddress, packageCity, packageState, packageZip, packageDeadLine, packageWeight, packageStat, packageTruck, packageDelTime, packageDepartTime, packageNotes)
+        packageObj = Package(packageID, packageAddress, packageCity, packageState, packageZip, packageDeadLine,
+                             packageWeight, packageStat, packageTruck, packageDelTime,
+                             packageDepartTime, packageNotes)
+        
         packageHashMap.add(packageID, packageObj)
         #print(f"Added package to hashmap - ID: {packageID}, Address: {packageAddress}, Status: {packageStat}")
         
 loadPackages(CSVPackage, packageHashMap)
 
+#function for updating addresses if addresses is wrong
+def updatePackageAddress(packageID, newAddress = None, newCity = None, newState = None, newZip = None):
+    # creates copy of the package object
+    package = packageHashMap.lookup(packageID)
+
+    updatedPackage = Package(
+      packageID, newAddress,  # Update only address
+      newCity, newState, newZip,
+      package.deadline, package.weight, package.status, package.truck, package.deliveryTime,
+      package.departureTime, package.notes
+      )
+    packageHashMap.update(packageID, updatedPackage)
+    return packageHashMap.lookup(packageID)
 
