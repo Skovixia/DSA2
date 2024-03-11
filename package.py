@@ -39,12 +39,12 @@ class Package:
             else:
                 self.status = "At hub"
 
-def isUpdateTime(inputTime):
+def isUpdateTime(inputTime, hashmap):
     updateTime = datetime.timedelta(hours = 10, minutes = 20)
     if inputTime >= updateTime:
-        updatePackageAddress(9, '410 S State St', 'Salt Lake City', 'UT', '84111')
+        updatePackageAddress(hashmap, 9, '410 S State St', 'Salt Lake City', 'UT', '84111')
 
-packageHashMap = HashMap()
+#packageHashMap = HashMap()
 
 #laoding each package to hashmap 
 def loadPackages(packageData, hashmap):
@@ -59,15 +59,15 @@ def loadPackages(packageData, hashmap):
                              packageWeight, packageStat, packageTruck, packageDelTime,
                              packageDepartTime, packageNotes)
         
-        packageHashMap.add(packageID, packageObj)
+        hashmap.add(packageID, packageObj)
         #print(f"Added package to hashmap - ID: {packageID}, Address: {packageAddress}, Status: {packageStat}")
         
-loadPackages(CSVPackage, packageHashMap)
+#loadPackages(CSVPackage, packageHashMap)
 
 #function for updating addresses if addresses is wrong
-def updatePackageAddress(packageID, newAddress = None, newCity = None, newState = None, newZip = None):
+def updatePackageAddress(hashmap, packageID, newAddress = None, newCity = None, newState = None, newZip = None):
     # creates copy of the package object
-    package = packageHashMap.lookup(packageID)
+    package = hashmap.lookup(packageID)
 
     updatedPackage = Package(
       packageID, newAddress,   # Updates only address fields
@@ -75,5 +75,5 @@ def updatePackageAddress(packageID, newAddress = None, newCity = None, newState 
       package.deadline, package.weight, package.status, package.truck, package.deliveryTime,
       package.departureTime, package.notes
       )
-    packageHashMap.update(packageID, updatedPackage)
-    return packageHashMap.lookup(packageID)
+    hashmap.update(packageID, updatedPackage)
+    return hashmap.lookup(packageID)

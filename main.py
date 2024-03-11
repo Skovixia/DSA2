@@ -2,6 +2,7 @@
 from truck import *
 from deliveryProcess import *
 from helpers import timeValidation
+from hashmap import HashMap
 
 # print("Truck 1 Departure Time:", truck1.departTime)
 # print("Truck 2 Departure Time:", truck2.departTime)
@@ -12,7 +13,7 @@ from helpers import timeValidation
 # print("Truck 3 Total Miles:", truck3.miles)
 
 #totalMiles = truck1.miles + truck2.miles + truck3.miles
-
+packageHashMap = HashMap()
 class Main:
     
     print("Welcome to WGPUS:")
@@ -24,9 +25,10 @@ class Main:
             exit()
             #confirms if time input is proper (found in helpers.py)
         if timeValidation(time):
+            loadPackages(CSVPackage, packageHashMap)
             inputTime = timeValidation(time)
-            isUpdateTime(inputTime)
-            dispatchTruck(truck1, truck2, truck3, inputTime)
+            isUpdateTime(inputTime, packageHashMap)
+            dispatchTruck(truck1, truck2, truck3, inputTime, packageHashMap)
 
             break
         else: 
@@ -41,7 +43,7 @@ class Main:
         print("D- to see delivered packages at this time.")
         print("E- to see packages en route at this time.")
         print("H- to see packages at the Hub at this time.")
-        #print("T- to input a different time.")
+        print("T- to input a different time.")
         print("Q- Quit")
         userInput = input("What can I help you find? (Type 'q' to quit): ")
         print("-----------------------------------------------------------------")
@@ -49,12 +51,33 @@ class Main:
 
         if userInput.lower() == 'q':
             break
+
+
+        if userInput.lower() == 't':
+            # Option for new time input
+            newTime = input("Please enter a new time in the format HH:MM:SS or 'q' to quit: ")
+            if newTime.lower() == 'q':
+                exit()
+            if timeValidation(newTime):
+
+                # for package in packageHashMap.items():
+                #     packageHashMap.delete(package.packageID)
+
+                # loadPackages(CSVPackage, packageHashMap)
+                inputTime = timeValidation(newTime)
+                isUpdateTime(inputTime, packageHashMap)
+                dispatchTruck(truck1, truck2, truck3, inputTime, packageHashMap)
+            else:
+                print("Invalid format. Please enter a time in the format: HH:MM:SS ")
+            continue
+
+
         #all options except for new time input
         if userInput in['s', 'S', 'a', 'A', 'd', 'D', 'e', 'E', 'h', 'H']:
             try:
                 #inputTime = timeValidation(time)
 
-                print("Input time: ", time)
+                print("Input time: ", inputTime)
 
                 if userInput.lower() == 's':
                     singlePackage = input("Enter the package ID: ")   
@@ -67,14 +90,14 @@ class Main:
                     for packageID in range(1, 41):
                         package = packageHashMap.lookup(packageID)
                         #status update defined in package.py
-                        package.statusUpdate(timeValidation(time))
+                        package.statusUpdate(inputTime)
                         print(package)
                 elif userInput.lower() == 'd':
                     #only prints packages with "Delivered" status at current time
                     packageDelivered = False
                     for packageID in range(1, 41):
                         package = packageHashMap.lookup(packageID)
-                        package.statusUpdate(timeValidation(time))
+                        package.statusUpdate(inputTime)
                         if package.status == "Delivered":
                             packageDelivered = True
                             print(package)
@@ -85,7 +108,7 @@ class Main:
                     packagesEnRoute = False
                     for packageID in range(1, 41):
                         package = packageHashMap.lookup(packageID)
-                        package.statusUpdate(timeValidation(time))
+                        package.statusUpdate(inputTime)
                         if package.status == "En route":
                             packagesEnRoute = True
                             print(package)
@@ -96,7 +119,7 @@ class Main:
                     packageAtHub = False
                     for packageID in range(1, 41):
                         package = packageHashMap.lookup(packageID)
-                        package.statusUpdate(timeValidation(time))
+                        package.statusUpdate(inputTime)
                         if package.status == "At hub":
                             packageAtHub = True
                             print(package)

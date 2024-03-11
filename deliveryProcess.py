@@ -5,31 +5,43 @@ from helpers import *
 
 counter = 0
 
-def dispatchTruck(truck1, truck2, truck3, inputTime):
+def dispatchTruck(truck1, truck2, truck3, inputTime, hashmap):
     if truck1.departTime <= inputTime:
-        deliverPackages(truck1)
+        truck1.miles= 0
+        truck1.time = truck1.departTime
+        deliverPackages(truck1, hashmap)
+        if truck1.time < truck2.departTime:
+            truck3.miles = 0
+            truck3.time = truck1.time
+            truck3.departTime = truck1.time
 
     if truck2.departTime <= inputTime:
-        deliverPackages(truck2)
+        truck2.miles = 0
+        truck2.time = truck2.departTime
+        deliverPackages(truck2, hashmap)
+        if truck2.time < truck1.departTime:
+            truck3.miles = 0
+            truck3.time = truck2.time
+            truck3.departTime = truck2.time
 
         # truck3.time = min(truck1.time, truck2.time)
         # truck3.departTime = min(truck1.time, truck2.time)
 
         # if truck3.departTime <= inputTime:
         #     deliverPackages(truck3)
-    if truck1.time < truck2.departTime and truck1.time >= inputTime:
-            truck3.time = truck1.time
-            truck3.departTime = truck1.time
-            deliverPackages(truck3)
-    else:
-        truck3.time = truck2.time
-        truck3.departTime = truck2.time
+
+    if truck3.departTime <= inputTime:
+        deliverPackages(truck3, hashmap)
+    # else:
+    #     truck3.time = truck2.time
+    #     truck3.departTime = truck2.time
+    #     deliverPackages(truck3)
 
 
 
 #sorts the packages in the truck in order by distance
-def sortPackages(currentIndex, truck):
-    unOrderedPackages = [packageHashMap.lookup(packageID) for packageID in truck.packages]
+def sortPackages(currentIndex, truck, hashmap):
+    unOrderedPackages = [hashmap.lookup(packageID) for packageID in truck.packages]
     sortedPackages = []
     while unOrderedPackages:
         #print("find nearest package starts:")
@@ -61,11 +73,11 @@ def sortPackages(currentIndex, truck):
     return sortedPackages
 
 
-def deliverPackages(truck):
+def deliverPackages(truck, hashmap):
     global counter
     totalDistance = 0
     #gets current location based on the truck's progress
-    sortedPackages = sortPackages(getLocationIndex(truck.address), truck)
+    sortedPackages = sortPackages(getLocationIndex(truck.address), truck, hashmap)
     for package in sortedPackages:
         package.truck = truck.id
         #retrieves index from location dictionary in helpers.py
