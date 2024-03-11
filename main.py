@@ -10,7 +10,6 @@ from helpers import timeValidation
 # print("Truck 1 Total Miles:", truck1.miles)
 # print("Truck 2 Total Miles:", truck2.miles)
 # print("Truck 3 Total Miles:", truck3.miles)
-updateTime = datetime.timedelta(hours = 10, minutes = 20)
 
 totalMiles = truck1.miles + truck2.miles + truck3.miles
 
@@ -38,7 +37,7 @@ class Main:
         print("D- to see delivered packages at this time.")
         print("E- to see packages en route at this time.")
         print("H- to see packages at the Hub at this time.")
-        print("T- To see options for another time.")
+        print("T- to input a different time.")
         print("Q- Quit")
         userInput = input("What can I help you find? (Type 'q' to quit): ")
         print("-----------------------------------------------------------------")
@@ -50,8 +49,9 @@ class Main:
         if userInput in['s', 'S', 'a', 'A', 'd', 'D', 'e', 'E', 'h', 'H']:
             try:
                 inputTime = timeValidation(time)
-                if inputTime >= updateTime:
-                    updatePackageAddress(9, '410 S State St', 'Salt Lake City', 'UT', '84111')
+                
+                isUpdateTime(inputTime)
+                
 
                 deliverPackage(truck1, inputTime)
                 deliverPackage(truck2, inputTime)
@@ -121,7 +121,8 @@ class Main:
                     break
                 #validating time
                 if timeValidation(newTime):
-                    time = newTime
+                    inputTime = timeValidation(newTime)
+                    isUpdateTime(inputTime)
                     break
                 else:
                     print("Invalid format. Please enter a time in the format: HH:MM:SS ")

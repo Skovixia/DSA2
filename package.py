@@ -1,5 +1,6 @@
 from hashmap import HashMap
 from readCSV import CSVPackage
+import datetime
 class Package:
 
     #class constructor
@@ -37,6 +38,10 @@ class Package:
         else:
             self.status = "At hub"
 
+def isUpdateTime(inputTime):
+    updateTime = datetime.timedelta(hours = 10, minutes = 20)
+    if inputTime >= updateTime:
+        updatePackageAddress(9, '410 S State St', 'Salt Lake City', 'UT', '84111')
 
 packageHashMap = HashMap()
 
