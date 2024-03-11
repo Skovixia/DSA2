@@ -11,12 +11,12 @@ from helpers import timeValidation
 # print("Truck 2 Total Miles:", truck2.miles)
 # print("Truck 3 Total Miles:", truck3.miles)
 
-totalMiles = truck1.miles + truck2.miles + truck3.miles
+#totalMiles = truck1.miles + truck2.miles + truck3.miles
 
 class Main:
     
     print("Welcome to WGPUS:")
-    print("Total mileage today: ", totalMiles)
+    #print("Total mileage today: ", totalMiles)
 
     while True:
         time = input("Please enter enquiry time or 'q' to quit: ")
@@ -51,14 +51,7 @@ class Main:
                 inputTime = timeValidation(time)
                 
                 isUpdateTime(inputTime)
-                
-
-                deliverPackage(truck1, inputTime)
-                deliverPackage(truck2, inputTime)
-                #sets truck 3 time and inputTepart time to whichever truck finishes deliveries first
-                truck3.time = min(truck1.time, truck2.time)
-                truck3.departTime = min(truck1.time, truck2.time)
-                deliverPackage(truck3, inputTime)
+                dispatchTruck(truck1, truck2, truck3, inputTime)
 
                 print("Input time: ", time)
 

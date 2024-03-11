@@ -31,12 +31,13 @@ class Package:
     
     #for updating status based on time given in main
     def statusUpdate(self, inputTime):
-        if self.deliveryTime < inputTime:
-            self.status = "Delivered"
-        elif self.departureTime <= inputTime <= self.deliveryTime:
-            self.status = "En route"
-        else:
-            self.status = "At hub"
+        if self.departureTime is not None:
+            if self.deliveryTime < inputTime:
+                self.status = "Delivered"
+            elif self.departureTime <= inputTime <= self.deliveryTime:
+                self.status = "En route"
+            else:
+                self.status = "At hub"
 
 def isUpdateTime(inputTime):
     updateTime = datetime.timedelta(hours = 10, minutes = 20)

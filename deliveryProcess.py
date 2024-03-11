@@ -4,7 +4,25 @@ from package import *
 from helpers import *
 
 counter = 0
-packageUpdateTime = datetime.timedelta(hours= 10, minutes=20)
+
+# def dispatchTruck(inputTime):
+#     if truck1.departTime <= inputTime:
+#         deliverPackages(truck1)
+#     elif truck2.departTime <= inputTime:
+#         deliverPackages(truck2)
+#     else:
+#         truck3.time = min(truck1.time, truck2.time)
+#         truck3.departTime = min(truck1.time, truck2.time)
+#         deliverPackages(truck3, inputTime)
+
+def dispatchTruck(truck1, truck2, truck3, inputTime):
+    if truck1.departTime <= inputTime:
+        deliverPackages(truck1)
+    if truck2.departTime <= inputTime:
+        deliverPackages(truck2)
+    truck3.time = min(truck1.time, truck2.time)
+    truck3.departTime = min(truck1.time, truck2.time)
+    deliverPackages(truck3)
 
 #sorts the packages in the truck in order by distance
 def sortPackages(currentIndex, truck):
@@ -40,7 +58,7 @@ def sortPackages(currentIndex, truck):
     return sortedPackages
 
 
-def deliverPackage(truck, inputTime):
+def deliverPackages(truck):
     global counter
     totalDistance = 0
     #gets current location based on the truck's progress
