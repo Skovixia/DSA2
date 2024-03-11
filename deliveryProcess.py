@@ -40,11 +40,9 @@ def sortPackages(currentIndex, truck):
     return sortedPackages
 
 
-def deliverPackage(truck):
+def deliverPackage(truck, inputTime):
     global counter
-    if truck.id == 2:
-       updatePackageAddress(9, '410 S State St', 'Salt Lake City', 'UT', '84111')
-
+    totalDistance = 0
     #gets current location based on the truck's progress
     sortedPackages = sortPackages(getLocationIndex(truck.address), truck)
     for package in sortedPackages:
@@ -57,6 +55,7 @@ def deliverPackage(truck):
         if currentIndex is not None and packageIndex is not None:
             #getting distance
             distance = distances(currentIndex, packageIndex)
+            totalDistance += distance
             #print("Distance: ", distance)
             counter += 1 #outputs total amount of delivered packages for testing
 
@@ -78,13 +77,14 @@ def deliverPackage(truck):
         else:
             print("Error: Invalid location indices")
             break
+    print("Total Miles for Truck ", truck.id, ": ", totalDistance)
 
-deliverPackage(truck1)
-deliverPackage(truck2)
-#sets truck 3 time and depart time to whichever truck finishes deliveries first
-truck3.time = min(truck1.time, truck2.time)
-truck3.departTime = min(truck1.time, truck2.time)
-deliverPackage(truck3)
+# deliverPackage(truck1, time)
+# deliverPackage(truck2, time)
+# #sets truck 3 time and depart time to whichever truck finishes deliveries first
+# truck3.time = min(truck1.time, truck2.time)
+# truck3.departTime = min(truck1.time, truck2.time)
+# deliverPackage(truck3, time)
 
  #updating package #9
 #if truck.time >= packageUpdateTime or truck.time <= truck2.departTime:

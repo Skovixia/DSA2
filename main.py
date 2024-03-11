@@ -1,15 +1,16 @@
 #Student ID: 010604128
 from truck import *
-from deliveryProcess import packageHashMap
+from deliveryProcess import *
 from helpers import timeValidation
 
-print("Truck 1 Departure Time:", truck1.departTime)
-print("Truck 2 Departure Time:", truck2.departTime)
-print("Truck 3 Departure Time:", truck3.departTime)
-print()
-print("Truck 1 Total Miles:", truck1.miles)
-print("Truck 2 Total Miles:", truck2.miles)
-print("Truck 3 Total Miles:", truck3.miles)
+# print("Truck 1 Departure Time:", truck1.departTime)
+# print("Truck 2 Departure Time:", truck2.departTime)
+# print("Truck 3 Departure Time:", truck3.departTime)
+# print()
+# print("Truck 1 Total Miles:", truck1.miles)
+# print("Truck 2 Total Miles:", truck2.miles)
+# print("Truck 3 Total Miles:", truck3.miles)
+updateTime = datetime.timedelta(hours = 10, minutes = 20)
 
 totalMiles = truck1.miles + truck2.miles + truck3.miles
 
@@ -48,6 +49,16 @@ class Main:
         #all options except for new time input
         if userInput in['s', 'S', 'a', 'A', 'd', 'D', 'e', 'E', 'h', 'H']:
             try:
+                inputTime = timeValidation(time)
+                if inputTime >= updateTime:
+                    updatePackageAddress(9, '410 S State St', 'Salt Lake City', 'UT', '84111')
+
+                deliverPackage(truck1, inputTime)
+                deliverPackage(truck2, inputTime)
+                #sets truck 3 time and inputTepart time to whichever truck finishes deliveries first
+                truck3.time = min(truck1.time, truck2.time)
+                truck3.departTime = min(truck1.time, truck2.time)
+                deliverPackage(truck3, inputTime)
 
                 print("Input time: ", time)
 
