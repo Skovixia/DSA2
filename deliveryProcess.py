@@ -5,24 +5,27 @@ from helpers import *
 
 counter = 0
 
-# def dispatchTruck(inputTime):
-#     if truck1.departTime <= inputTime:
-#         deliverPackages(truck1)
-#     elif truck2.departTime <= inputTime:
-#         deliverPackages(truck2)
-#     else:
-#         truck3.time = min(truck1.time, truck2.time)
-#         truck3.departTime = min(truck1.time, truck2.time)
-#         deliverPackages(truck3, inputTime)
-
 def dispatchTruck(truck1, truck2, truck3, inputTime):
     if truck1.departTime <= inputTime:
         deliverPackages(truck1)
+
     if truck2.departTime <= inputTime:
         deliverPackages(truck2)
-    truck3.time = min(truck1.time, truck2.time)
-    truck3.departTime = min(truck1.time, truck2.time)
-    deliverPackages(truck3)
+
+        # truck3.time = min(truck1.time, truck2.time)
+        # truck3.departTime = min(truck1.time, truck2.time)
+
+        # if truck3.departTime <= inputTime:
+        #     deliverPackages(truck3)
+    if truck1.time < truck2.departTime:
+            truck3.time = truck1.time
+            truck3.departTime = truck1.time
+            deliverPackages(truck3)
+    else:
+        truck3.time = truck2.time
+        truck3.departTime = truck2.time
+
+
 
 #sorts the packages in the truck in order by distance
 def sortPackages(currentIndex, truck):
@@ -64,7 +67,6 @@ def deliverPackages(truck):
     #gets current location based on the truck's progress
     sortedPackages = sortPackages(getLocationIndex(truck.address), truck)
     for package in sortedPackages:
-        #sets which truck the package object is assigned to 
         package.truck = truck.id
         #retrieves index from location dictionary in helpers.py
         #print("Next Package: ", package.packageID)
@@ -96,6 +98,12 @@ def deliverPackages(truck):
             print("Error: Invalid location indices")
             break
     print("Total Miles for Truck ", truck.id, ": ", totalDistance)
+
+
+
+
+
+
 
 # deliverPackage(truck1, time)
 # deliverPackage(truck2, time)
