@@ -5,22 +5,26 @@ from helpers import *
 
 counter = 0
 
-def dispatchTruck(truck1, truck2, truck3, inputTime, hashmap):
+def dispatchTruck(trucksHashMap, inputTime, packageHashMap):
+    #re-initialize for if user enters another inputTime
+    truckInitialize()
+
+    truck1 = trucksHashMap.lookup(1)
+    truck2 = trucksHashMap.lookup(2)
+    truck3= trucksHashMap.lookup(3)
+    truckIDToPackage(truck1, packageHashMap)
+    truckIDToPackage(truck2, packageHashMap)
+    truckIDToPackage(truck3, packageHashMap)
+
     if truck1.departTime <= inputTime:
-        truck1.miles= 0
-        truck1.time = truck1.departTime
-        deliverPackages(truck1, hashmap)
+        deliverPackages(truck1, packageHashMap)
         if truck1.time < truck2.departTime:
-            truck3.miles = 0
             truck3.time = truck1.time
             truck3.departTime = truck1.time
 
     if truck2.departTime <= inputTime:
-        truck2.miles = 0
-        truck2.time = truck2.departTime
-        deliverPackages(truck2, hashmap)
+        deliverPackages(truck2, packageHashMap)
         if truck2.time < truck1.departTime:
-            truck3.miles = 0
             truck3.time = truck2.time
             truck3.departTime = truck2.time
 
@@ -31,7 +35,7 @@ def dispatchTruck(truck1, truck2, truck3, inputTime, hashmap):
         #     deliverPackages(truck3)
 
     if truck3.departTime <= inputTime:
-        deliverPackages(truck3, hashmap)
+        deliverPackages(truck3, packageHashMap)
     # else:
     #     truck3.time = truck2.time
     #     truck3.departTime = truck2.time
@@ -79,7 +83,7 @@ def deliverPackages(truck, hashmap):
     #gets current location based on the truck's progress
     sortedPackages = sortPackages(getLocationIndex(truck.address), truck, hashmap)
     for package in sortedPackages:
-        package.truck = truck.id
+        package.truck = truck.truckID
         #retrieves index from location dictionary in helpers.py
         #print("Next Package: ", package.packageID)
         currentIndex = getLocationIndex(truck.address)
@@ -87,7 +91,10 @@ def deliverPackages(truck, hashmap):
         if currentIndex is not None and packageIndex is not None:
             #getting distance
             distance = distances(currentIndex, packageIndex)
+            # print("PackageID: ", package.packageID)
+            # print("Distance: ", distance)
             totalDistance += distance
+            #print("Total distance:", totalDistance)
             #print("Distance: ", distance)
             counter += 1 #outputs total amount of delivered packages for testing
 
@@ -109,7 +116,7 @@ def deliverPackages(truck, hashmap):
         else:
             print("Error: Invalid location indices")
             break
-    print("Total Miles for Truck ", truck.id, ": ", totalDistance)
+    print("Total Miles for Truck ", truck.truckID, ": ", totalDistance)
 
 
 
