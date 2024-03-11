@@ -19,11 +19,15 @@ class Main:
     #print("Total mileage today: ", totalMiles)
 
     while True:
-        time = input("Please enter enquiry time or 'q' to quit: ")
+        time = input("Please enter enquiry time in the format HH:MM:SS or 'q' to quit: ")
         if time.lower() == 'q':
             exit()
             #confirms if time input is proper (found in helpers.py)
         if timeValidation(time):
+            inputTime = timeValidation(time)
+            isUpdateTime(inputTime)
+            dispatchTruck(truck1, truck2, truck3, inputTime)
+
             break
         else: 
             print("Invalid format. Please enter a time in the format: HH:MM:SS ")
@@ -37,7 +41,7 @@ class Main:
         print("D- to see delivered packages at this time.")
         print("E- to see packages en route at this time.")
         print("H- to see packages at the Hub at this time.")
-        print("T- to input a different time.")
+        #print("T- to input a different time.")
         print("Q- Quit")
         userInput = input("What can I help you find? (Type 'q' to quit): ")
         print("-----------------------------------------------------------------")
@@ -48,10 +52,7 @@ class Main:
         #all options except for new time input
         if userInput in['s', 'S', 'a', 'A', 'd', 'D', 'e', 'E', 'h', 'H']:
             try:
-                inputTime = timeValidation(time)
-                
-                isUpdateTime(inputTime)
-                dispatchTruck(truck1, truck2, truck3, inputTime)
+                #inputTime = timeValidation(time)
 
                 print("Input time: ", time)
 
@@ -106,19 +107,19 @@ class Main:
                     #if input is not expected value
             except ValueError:
                 print("Invalid option. Please try again or type 'q' to quit.")
-        elif userInput.lower() == 't':
-            #option for new time input
-            while True:
-                newTime = input("Please enter enquiry time or 'q' to quit: ")
-                if newTime.lower()== 'q':
-                    break
-                #validating time
-                if timeValidation(newTime):
-                    inputTime = timeValidation(newTime)
-                    isUpdateTime(inputTime)
-                    break
-                else:
-                    print("Invalid format. Please enter a time in the format: HH:MM:SS ")
+        # elif userInput.lower() == 't':
+        #     #option for new time input
+        #     while True:
+        #         newTime = input("Please enter enquiry time or 'q' to quit: ")
+        #         if newTime.lower()== 'q':
+        #             break
+        #         #validating time
+        #         if timeValidation(newTime):
+        #             inputTime = timeValidation(newTime)
+        #             isUpdateTime(inputTime)
+        #             break
+        #         else:
+        #             print("Invalid format. Please enter a time in the format: HH:MM:SS ")
         else:
             print("Invalid option. Please try again or type 'q' to quit.")
             
