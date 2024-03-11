@@ -28,7 +28,7 @@ class Main:
             loadPackages(CSVPackage, packageHashMap)
             inputTime = timeValidation(time)
             isUpdateTime(inputTime, packageHashMap)
-            dispatchTruck(truck1, truck2, truck3, inputTime, packageHashMap)
+            dispatchTruck(trucksHashMap, inputTime, packageHashMap)
 
             break
         else: 
@@ -43,7 +43,7 @@ class Main:
         print("D- to see delivered packages at this time.")
         print("E- to see packages en route at this time.")
         print("H- to see packages at the Hub at this time.")
-        print("T- to input a different time.")
+        print("T- to input a time.")
         print("Q- Quit")
         userInput = input("What can I help you find? (Type 'q' to quit): ")
         print("-----------------------------------------------------------------")
@@ -60,13 +60,15 @@ class Main:
                 exit()
             if timeValidation(newTime):
 
-                # for package in packageHashMap.items():
-                #     packageHashMap.delete(package.packageID)
+                for package in packageHashMap.items():
+                    packageHashMap.delete(package.packageID)
 
-                # loadPackages(CSVPackage, packageHashMap)
+                loadPackages(CSVPackage, packageHashMap)
                 inputTime = timeValidation(newTime)
                 isUpdateTime(inputTime, packageHashMap)
-                dispatchTruck(truck1, truck2, truck3, inputTime, packageHashMap)
+                # for items in packageHashMap.items():
+                #     print(items)
+                dispatchTruck(trucksHashMap, inputTime, packageHashMap)
             else:
                 print("Invalid format. Please enter a time in the format: HH:MM:SS ")
             continue
