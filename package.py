@@ -4,7 +4,7 @@ import datetime
 class Package:
 
     #class constructor
-    def __init__(self, packageID, address, city, state, zip, deadline, weight,status, truck, departureTime, deliveryTime, notes):
+    def __init__(self, packageID, address, city, state, zip, deadline, weight, status, truck, departureTime, deliveryTime, notes):
         self.packageID = packageID
         self.address = address
         self.city= city
@@ -14,8 +14,8 @@ class Package:
         self.weight = weight
         self.status = status
         self.truck = truck  #assigning a truck to each package(for debugging)
-        self.deliveryTime= None #setting del time and depart time to none, will be updated when delivered
-        self.departureTime = None
+        self.deliveryTime= deliveryTime #setting del time and depart time to none, will be updated when delivered
+        self.departureTime = departureTime
         self.notes = notes
     def __str__(self):
         #for interface- If not delivered yet, will display "estimated delivery"
@@ -44,14 +44,12 @@ def isUpdateTime(inputTime, hashmap):
     if inputTime >= updateTime:
         updatePackageAddress(hashmap, 9, '410 S State St', 'Salt Lake City', 'UT', '84111')
 
-#packageHashMap = HashMap()
-
 #laoding each package to hashmap 
 def loadPackages(packageData, hashmap):
     for package in packageData:
         packageID = int(package[0])
         packageAddress, packageCity, packageState, packageZip, packageDeadLine, packageWeight, packageNotes = package[1:8]
-        packageStat = "At Hub"
+        packageStat = "At hub"
         packageTruck = None
         packageDelTime= None
         packageDepartTime = None
@@ -61,8 +59,7 @@ def loadPackages(packageData, hashmap):
         
         hashmap.add(packageID, packageObj)
         #print(f"Added package to hashmap - ID: {packageID}, Address: {packageAddress}, Status: {packageStat}")
-        
-#loadPackages(CSVPackage, packageHashMap)
+
 
 #function for updating addresses if addresses is wrong
 def updatePackageAddress(hashmap, packageID, newAddress = None, newCity = None, newState = None, newZip = None):
