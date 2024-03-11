@@ -17,7 +17,7 @@ def dispatchTruck(truck1, truck2, truck3, inputTime):
 
         # if truck3.departTime <= inputTime:
         #     deliverPackages(truck3)
-    if truck1.time < truck2.departTime:
+    if truck1.time < truck2.departTime and truck1.time >= inputTime:
             truck3.time = truck1.time
             truck3.departTime = truck1.time
             deliverPackages(truck3)
