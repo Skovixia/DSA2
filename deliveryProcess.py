@@ -1,6 +1,6 @@
 import datetime
 from truck import *
-from package import *
+#from package import packageHashMap
 from helpers import *
 
 counter = 0
@@ -8,7 +8,7 @@ counter = 0
 def dispatchTruck(trucksHashMap, inputTime, packageHashMap):
     #re-initialize for if user enters another inputTime
     truckInitialize()
-
+        
     truck1 = trucksHashMap.lookup(1)
     truck2 = trucksHashMap.lookup(2)
     truck3= trucksHashMap.lookup(3)
@@ -124,12 +124,12 @@ def deliverPackages(truck, hashmap):
 
 
 
-# deliverPackage(truck1, time)
-# deliverPackage(truck2, time)
+# deliverPackages(truck1, packageHashMap)
+# deliverPackages(truck2, packageHashMap)
 # #sets truck 3 time and depart time to whichever truck finishes deliveries first
 # truck3.time = min(truck1.time, truck2.time)
 # truck3.departTime = min(truck1.time, truck2.time)
-# deliverPackage(truck3, time)
+# deliverPackages(truck3, packageHashMap)
 
  #updating package #9
 #if truck.time >= packageUpdateTime or truck.time <= truck2.departTime:

@@ -44,6 +44,10 @@ def isUpdateTime(inputTime, hashmap):
     if inputTime >= updateTime:
         updatePackageAddress(hashmap, 9, '410 S State St', 'Salt Lake City', 'UT', '84111')
 
+
+
+
+#packageHashMap = HashMap()
 #laoding each package to hashmap 
 def loadPackages(packageData, hashmap):
     for package in packageData:
@@ -60,7 +64,7 @@ def loadPackages(packageData, hashmap):
         hashmap.add(packageID, packageObj)
         #print(f"Added package to hashmap - ID: {packageID}, Address: {packageAddress}, Status: {packageStat}")
 
-
+#loadPackages(CSVPackage, packageHashMap)
 #function for updating addresses if addresses is wrong
 def updatePackageAddress(hashmap, packageID, newAddress = None, newCity = None, newState = None, newZip = None):
     # creates copy of the package object

@@ -1,6 +1,6 @@
 import datetime
 from hashmap import HashMap
-import package
+#from package import packageHashMap
 class Truck:
     #class constructor for truck objects
     def __init__(self, truckID, maxPackages, speed, load, packages, miles, address, departureTime):
