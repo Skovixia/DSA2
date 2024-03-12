@@ -33,6 +33,9 @@ class Main:
             inputTime = timeValidation(time)
             isUpdateTime(inputTime, packageHashMap)
             dispatchTruck(trucksHashMap, inputTime, packageHashMap)
+            truck1 = trucksHashMap.lookup(1)
+            truck2 = trucksHashMap.lookup(2)
+            truck3= trucksHashMap.lookup(3)
 
             break
         else: 
@@ -47,7 +50,7 @@ class Main:
         print("D- to see delivered packages at this time.")
         print("E- to see packages en route at this time.")
         print("H- to see packages at the Hub at this time.")
-        print("T- total miles traveled.")
+        print("T- total miles traveled for the whole day.")
         print("Q- Quit")
         userInput = input("What can I help you find? (Type 'q' to quit): ")
         print("-----------------------------------------------------------------")
@@ -64,18 +67,25 @@ class Main:
 
 
                 if userInput.lower() == 't':
+                    endOfDay = datetime.timedelta(hours=23, minutes=59, seconds=59)
                     for items in packageHashMap.items():
                         packageHashMap.delete(items)
                     loadPackages(CSVPackage, packageHashMap)
-                    dispatchTruck(trucksHashMap, datetime.timedelta(hours=23, minutes=59, seconds=59), packageHashMap)
-
+                    isUpdateTime(endOfDay, packageHashMap)
+                    dispatchTruck(trucksHashMap, endOfDay, packageHashMap) 
                     truck1 = trucksHashMap.lookup(1)
                     truck2 = trucksHashMap.lookup(2)
                     truck3= trucksHashMap.lookup(3)
-                    
                     totalMiles = truck1.miles + truck2.miles + truck3.miles
                     print("Total miles traveled for the day: ", totalMiles)
-              
+
+
+                print("Truck 1 Miles at this time:", truck1.miles)
+                print("Truck 2 Miles at this time:", truck2.miles)
+                print("Truck 3 Miles at this time:", truck3.miles)
+                totalMiles = truck1.miles + truck2.miles + truck3.miles
+                print("Total miles traveled at this time: ", totalMiles)
+
                 if userInput.lower() == 's':
                     print("Input time: ", inputTime)
                     singlePackage = input("Enter the package ID: ")   

@@ -116,7 +116,7 @@ def deliverPackages(truck, hashmap):
         else:
             print("Error: Invalid location indices")
             break
-    print("Total Miles for Truck ", truck.truckID, ": ", totalDistance)
+    #print("Total Miles for Truck ", truck.truckID, ": ", totalDistance)
 
 
 
